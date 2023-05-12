@@ -42,17 +42,18 @@
             </header>
             <main>
                 <h2 class="text-center">Consultar - Contatos agendados</h2>
-                <table class="table bg-primary">
-                    <thead>
+                <table class="table align-middle">
+                    <thead class="text-center">
                         <tr>
                             <th>Nome</th>
                             <th>Telefone</th>
                             <th>Origem</th>
                             <th>Contato</th>
                             <th>Observação</th>  
+                            <th>ação</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-center">
                     @foreach($agendamentos as $agendamento)
                         <tr>
                             <td>{{$agendamento->Nome}}</td>
@@ -60,6 +61,14 @@
                             <td>{{$agendamento->Origem}}</td>
                             <td>{{$agendamento->Data_contato}}</td>
                             <td>{{$agendamento->Observacao}}</td>
+                            <td class="d-flex justify-content-center gap-2">
+                                <a href="{{url("editar/$agendamento->id")}}" class="btn btn-primary">Editar</a>
+                                <form method="post" action="excluir/{{$agendamento->id}}">
+                                    @csrf
+                                    @method("delete")
+                                    <button type="submit" href="{{url("excluir/$agendamento->id")}}" class="btn btn-danger">Excluir</button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach 
                     </tbody>
